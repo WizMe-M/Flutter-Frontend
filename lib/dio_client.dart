@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:dio/dio.dart';
 import 'package:flutter_frontend/model/model_response.dart';
 import 'package:flutter_frontend/model/user.dart';
@@ -11,7 +13,7 @@ class DioClient {
   static const String authHeader = 'Authorization';
 
   final _protocol = "http";
-  final _ip = "localhost";
+  final _ip = Platform.isWindows ? "localhost" : "192.168.1.118";
   final _port = 5781;
 
   String get _baseUrl => '$_protocol://$_ip:$_port';

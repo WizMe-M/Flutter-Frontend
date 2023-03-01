@@ -19,10 +19,22 @@ class _RegistrationPageState extends State<RegistrationPage> {
   bool isPasswordHidden = true;
 
   void onSignUpPressed(String email, String username, String password) async {
-    var alert = const AlertDialog(
-      title: Text('Registration Attempt'),
-      content: Text('Registration failed. Try to restart API'),
-    );
+    var response = await _client.register(
+        email: email, username: username, password: password);
+
+    AlertDialog alert;
+    if (response == null) {
+      alert = const AlertDialog(
+        title: Text('Registration attempt'),
+        content: Text('Registration failed. Try to restart API'),
+      );
+    } else {
+      alert = AlertDialog(
+        title: const Text('Registration attempt'),
+        content: Text(response.message!),
+        actions: [TextButton(onPressed: () {}, child: const Text('Sign In'))],
+      );
+    }
 
     showDialog(context: context, builder: (context) => alert);
   }
@@ -39,7 +51,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
         padding: const EdgeInsets.all(20),
         child: Center(
           child: SizedBox(
-            height: 300,
+            height: 350,
             width: 400,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -66,10 +78,10 @@ class _RegistrationPageState extends State<RegistrationPage> {
                   controller: _passwordController,
                   prefIcon: Icons.password,
                   labelText: 'Password',
-                  textInputAction: TextInputAction.done,
                   obscureText: isPasswordHidden,
                   isPasswordField: true,
                   toggleObscureCallback: togglePasswordObscure,
+                  textInputAction: TextInputAction.done,
                 ),
                 const SizedBox(
                   height: 20,
@@ -79,7 +91,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                       onSignUpPressed(_emailController.text,
                           _usernameController.text, _passwordController.text);
                     },
-                    child: const Text('Sign In')),
+                    child: const Text('Sign Up')),
                 const Spacer(),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,

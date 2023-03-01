@@ -22,7 +22,7 @@ class _AuthPageState extends State<AuthPage> {
         await _client.authenticate(username: username, password: password);
     if (response == null) {
       var alert = const AlertDialog(
-        title: Text('Auth:'),
+        title: Text('Auth attempt'),
         content: Text('Authorization failed. Try to restart API'),
       );
       showDialog(
@@ -33,7 +33,7 @@ class _AuthPageState extends State<AuthPage> {
     }
 
     var alert = AlertDialog(
-        title: const Text('Auth Attempt: '),
+        title: const Text('Auth attempt'),
         content: Text(response.message!),
         actions: [
           TextButton(

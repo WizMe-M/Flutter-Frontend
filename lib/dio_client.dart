@@ -39,4 +39,25 @@ class DioClient {
 
     return modelResponse;
   }
+
+  Future<ModelResponse?> register(
+      {required String email,
+      required String username,
+      required String password}) async {
+    Response? response;
+    var inputted = User(email: email, userName: username, password: password);
+
+    try {
+      response = await _dio.put('$_baseUrl/token',
+          data: inputted.toJson(),
+          options: Options(receiveDataWhenStatusError: true));
+    } on DioError catch (e) {
+      return e.response?.data != null
+          ? ModelResponse.fromJson(e.response!.data)
+          : null;
+    }
+
+    var modelResponse = ModelResponse.fromJson(response.data);
+    return modelResponse;
+  }
 }

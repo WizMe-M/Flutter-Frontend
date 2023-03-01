@@ -2,57 +2,28 @@ import 'package:flutter/material.dart';
 import 'package:flutter_frontend/dio_client.dart';
 import 'package:flutter_frontend/widget/utils/dynamic_auth_widget.dart';
 
-class AuthPage extends StatefulWidget {
-  const AuthPage({Key? key}) : super(key: key);
+class RegistrationPage extends StatefulWidget {
+  const RegistrationPage({Key? key}) : super(key: key);
 
   @override
-  State<AuthPage> createState() => _AuthPageState();
+  State<RegistrationPage> createState() => _RegistrationPageState();
 }
 
-class _AuthPageState extends State<AuthPage> {
+class _RegistrationPageState extends State<RegistrationPage> {
   final DioClient _client = DioClient();
 
+  final TextEditingController _emailController = TextEditingController();
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
   bool isPasswordHidden = true;
 
-  void onSignInPressed(String username, String password) async {
-    var response =
-        await _client.authenticate(username: username, password: password);
-    if (response == null) {
-      var alert = const AlertDialog(
-        title: Text('Auth:'),
-        content: Text('Authorization failed. Try to restart API'),
-      );
-      showDialog(
-        context: context,
-        builder: (context) => alert,
-      );
-      return;
-    }
+  void onSignUpPressed(String email, String username, String password) async {
+    var alert = const AlertDialog(
+      title: Text('Registration Attempt'),
+      content: Text('Registration failed. Try to restart API'),
+    );
 
-    var alert = AlertDialog(
-        title: const Text('Auth Attempt: '),
-        content: Text(response.message!),
-        actions: [
-          TextButton(
-              onPressed: () {
-                if (response.error!.isNotEmpty) {
-                  Navigator.of(context, rootNavigator: true).pop();
-                } else {
-                  Navigator.of(context, rootNavigator: true).pop();
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (BuildContext context) {
-                        return const Text('Authorized');
-                      },
-                    ),
-                  );
-                }
-              },
-              child: const Text('OK'))
-        ]);
     showDialog(context: context, builder: (context) => alert);
   }
 
@@ -73,6 +44,15 @@ class _AuthPageState extends State<AuthPage> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                DynamicInputWidget(
+                  controller: _emailController,
+                  prefIcon: Icons.email,
+                  labelText: 'Email',
+                  textInputAction: TextInputAction.next,
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
                 DynamicInputWidget(
                   controller: _usernameController,
                   prefIcon: Icons.person,
@@ -96,7 +76,7 @@ class _AuthPageState extends State<AuthPage> {
                 ),
                 ElevatedButton(
                     onPressed: () {
-                      onSignInPressed(
+                      onSignUpPressed(_emailController.text,
                           _usernameController.text, _passwordController.text);
                     },
                     child: const Text('Sign In')),
@@ -104,8 +84,8 @@ class _AuthPageState extends State<AuthPage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Text("Don't have an account yet?"),
-                    TextButton(onPressed: () {}, child: const Text('Register'))
+                    const Text("Already have an account?"),
+                    TextButton(onPressed: () {}, child: const Text('Authorize'))
                   ],
                 )
               ],

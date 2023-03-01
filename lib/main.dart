@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_frontend/widget/page/auth_page.dart';
+import 'package:flutter_frontend/widget/page/registration_page.dart';
 import 'package:window_size/window_size.dart';
 
 void main() {
@@ -27,7 +28,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const AuthPage(),
+      home: const RegistrationPage(),
     );
   }
 }

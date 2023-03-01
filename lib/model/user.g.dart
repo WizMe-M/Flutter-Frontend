@@ -15,7 +15,6 @@ _$_User _$$_UserFromJson(Map<String, dynamic> json) => _$_User(
       refreshToken: json['refreshToken'] as String?,
       salt: json['salt'] as String?,
       hashPassword: json['hashPassword'] as String?,
-      isActive: json['isActive'] as bool?,
     );
 
 Map<String, dynamic> _$$_UserToJson(_$_User instance) => <String, dynamic>{
@@ -27,5 +26,4 @@ Map<String, dynamic> _$$_UserToJson(_$_User instance) => <String, dynamic>{
       'refreshToken': instance.refreshToken,
       'salt': instance.salt,
       'hashPassword': instance.hashPassword,
-      'isActive': instance.isActive,
     };

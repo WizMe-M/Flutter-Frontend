@@ -28,7 +28,6 @@ mixin _$User {
   String? get refreshToken => throw _privateConstructorUsedError;
   String? get salt => throw _privateConstructorUsedError;
   String? get hashPassword => throw _privateConstructorUsedError;
-  bool? get isActive => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -48,8 +47,7 @@ abstract class $UserCopyWith<$Res> {
       String? accessToken,
       String? refreshToken,
       String? salt,
-      String? hashPassword,
-      bool? isActive});
+      String? hashPassword});
 }
 
 /// @nodoc
@@ -73,7 +71,6 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
     Object? refreshToken = freezed,
     Object? salt = freezed,
     Object? hashPassword = freezed,
-    Object? isActive = freezed,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
@@ -108,10 +105,6 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
           ? _value.hashPassword
           : hashPassword // ignore: cast_nullable_to_non_nullable
               as String?,
-      isActive: freezed == isActive
-          ? _value.isActive
-          : isActive // ignore: cast_nullable_to_non_nullable
-              as bool?,
     ) as $Val);
   }
 }
@@ -130,8 +123,7 @@ abstract class _$$_UserCopyWith<$Res> implements $UserCopyWith<$Res> {
       String? accessToken,
       String? refreshToken,
       String? salt,
-      String? hashPassword,
-      bool? isActive});
+      String? hashPassword});
 }
 
 /// @nodoc
@@ -151,7 +143,6 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res, _$_User>
     Object? refreshToken = freezed,
     Object? salt = freezed,
     Object? hashPassword = freezed,
-    Object? isActive = freezed,
   }) {
     return _then(_$_User(
       id: freezed == id
@@ -186,10 +177,6 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res, _$_User>
           ? _value.hashPassword
           : hashPassword // ignore: cast_nullable_to_non_nullable
               as String?,
-      isActive: freezed == isActive
-          ? _value.isActive
-          : isActive // ignore: cast_nullable_to_non_nullable
-              as bool?,
     ));
   }
 }
@@ -205,8 +192,7 @@ class _$_User implements _User {
       this.accessToken,
       this.refreshToken,
       this.salt,
-      this.hashPassword,
-      this.isActive});
+      this.hashPassword});
 
   factory _$_User.fromJson(Map<String, dynamic> json) => _$$_UserFromJson(json);
 
@@ -226,12 +212,10 @@ class _$_User implements _User {
   final String? salt;
   @override
   final String? hashPassword;
-  @override
-  final bool? isActive;
 
   @override
   String toString() {
-    return 'User(id: $id, userName: $userName, email: $email, password: $password, accessToken: $accessToken, refreshToken: $refreshToken, salt: $salt, hashPassword: $hashPassword, isActive: $isActive)';
+    return 'User(id: $id, userName: $userName, email: $email, password: $password, accessToken: $accessToken, refreshToken: $refreshToken, salt: $salt, hashPassword: $hashPassword)';
   }
 
   @override
@@ -251,15 +235,13 @@ class _$_User implements _User {
                 other.refreshToken == refreshToken) &&
             (identical(other.salt, salt) || other.salt == salt) &&
             (identical(other.hashPassword, hashPassword) ||
-                other.hashPassword == hashPassword) &&
-            (identical(other.isActive, isActive) ||
-                other.isActive == isActive));
+                other.hashPassword == hashPassword));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, id, userName, email, password,
-      accessToken, refreshToken, salt, hashPassword, isActive);
+      accessToken, refreshToken, salt, hashPassword);
 
   @JsonKey(ignore: true)
   @override
@@ -284,8 +266,7 @@ abstract class _User implements User {
       final String? accessToken,
       final String? refreshToken,
       final String? salt,
-      final String? hashPassword,
-      final bool? isActive}) = _$_User;
+      final String? hashPassword}) = _$_User;
 
   factory _User.fromJson(Map<String, dynamic> json) = _$_User.fromJson;
 
@@ -305,8 +286,6 @@ abstract class _User implements User {
   String? get salt;
   @override
   String? get hashPassword;
-  @override
-  bool? get isActive;
   @override
   @JsonKey(ignore: true)
   _$$_UserCopyWith<_$_User> get copyWith => throw _privateConstructorUsedError;

@@ -14,8 +14,7 @@ class User with _$User {
       String? accessToken,
       String? refreshToken,
       String? salt,
-      String? hashPassword,
-      bool? isActive}) = _User;
+      String? hashPassword}) = _User;
 
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
 }

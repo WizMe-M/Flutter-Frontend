@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_frontend/dio_client.dart';
+import 'package:flutter_frontend/model/model_response.dart';
+import 'package:flutter_frontend/widget/routing/enum_app_page.dart';
 import 'package:flutter_frontend/widget/utils/dynamic_auth_widget.dart';
+import 'package:go_router/go_router.dart';
 
 class RegistrationPage extends StatefulWidget {
   const RegistrationPage({Key? key}) : super(key: key);
@@ -18,10 +21,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
 
   bool isPasswordHidden = true;
 
-  void onSignUpPressed(String email, String username, String password) async {
-    var response = await _client.register(
-        email: email, username: username, password: password);
-
+  void showRegisterAttemptDialog(ModelResponse? response) {
     AlertDialog alert;
     if (response == null) {
       alert = const AlertDialog(
@@ -32,11 +32,25 @@ class _RegistrationPageState extends State<RegistrationPage> {
       alert = AlertDialog(
         title: const Text('Registration attempt'),
         content: Text(response.message!),
-        actions: [TextButton(onPressed: () {}, child: const Text('Sign In'))],
+        actions: [
+          TextButton(
+              onPressed: () {
+                context.go(AppPage.signIn.path);
+              },
+              child: const Text('Sign In'))
+        ],
       );
     }
 
     showDialog(context: context, builder: (context) => alert);
+  }
+
+  void onSignUpPressed() async {
+    var response = await _client.register(
+        email: _emailController.text,
+        username: _usernameController.text,
+        password: _passwordController.text);
+    showRegisterAttemptDialog(response);
   }
 
   void togglePasswordObscure() {
@@ -87,17 +101,17 @@ class _RegistrationPageState extends State<RegistrationPage> {
                   height: 20,
                 ),
                 ElevatedButton(
-                    onPressed: () {
-                      onSignUpPressed(_emailController.text,
-                          _usernameController.text, _passwordController.text);
-                    },
-                    child: const Text('Sign Up')),
+                    onPressed: onSignUpPressed, child: const Text('Sign Up')),
                 const Spacer(),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     const Text("Already have an account?"),
-                    TextButton(onPressed: () {}, child: const Text('Authorize'))
+                    TextButton(
+                        onPressed: () {
+                          context.go(AppPage.signIn.path);
+                        },
+                        child: const Text('Authorize'))
                   ],
                 )
               ],

@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_frontend/dio_client.dart';
+import 'package:flutter_frontend/model/model_response.dart';
+import 'package:flutter_frontend/model/user.dart';
+import 'package:flutter_frontend/widget/routing/enum_app_page.dart';
 import 'package:flutter_frontend/widget/utils/dynamic_auth_widget.dart';
+import 'package:go_router/go_router.dart';
 
 class AuthPage extends StatefulWidget {
   const AuthPage({Key? key}) : super(key: key);
@@ -17,43 +21,44 @@ class _AuthPageState extends State<AuthPage> {
 
   bool isPasswordHidden = true;
 
-  void onSignInPressed(String username, String password) async {
-    var response =
-        await _client.authenticate(username: username, password: password);
+  void showAuthAttemptDialog(ModelResponse? response) {
+    AlertDialog alert;
+
     if (response == null) {
-      var alert = const AlertDialog(
+      alert = const AlertDialog(
         title: Text('Auth attempt'),
         content: Text('Authorization failed. Try to restart API'),
       );
-      showDialog(
-        context: context,
-        builder: (context) => alert,
-      );
-      return;
-    }
+    } else {
+      User? user;
+      var authorized = response.error == null || response.error!.isEmpty;
+      if (authorized) {
+        user = User.fromJson(response.data);
+      }
 
-    var alert = AlertDialog(
-        title: const Text('Auth attempt'),
-        content: Text(response.message!),
-        actions: [
-          TextButton(
-              onPressed: () {
-                if (response.error!.isNotEmpty) {
-                  Navigator.of(context, rootNavigator: true).pop();
-                } else {
-                  Navigator.of(context, rootNavigator: true).pop();
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (BuildContext context) {
-                        return const Text('Authorized');
-                      },
-                    ),
-                  );
-                }
-              },
-              child: const Text('OK'))
-        ]);
+      alert = AlertDialog(
+          title: const Text('Auth attempt'),
+          content: Text(response.message!),
+          actions: [
+            TextButton(
+                onPressed: () {
+                  if (authorized) {
+                    context.pop();
+                    // context.go(AppPage.signUp.path);
+                  } else {
+                    context.pop();
+                  }
+                },
+                child: const Text('OK'))
+          ]);
+    }
     showDialog(context: context, builder: (context) => alert);
+  }
+
+  void onSignInPressed() async {
+    var response = await _client.authenticate(
+        username: _usernameController.text, password: _passwordController.text);
+    showAuthAttemptDialog(response);
   }
 
   void togglePasswordObscure() {
@@ -95,17 +100,17 @@ class _AuthPageState extends State<AuthPage> {
                   height: 20,
                 ),
                 ElevatedButton(
-                    onPressed: () {
-                      onSignInPressed(
-                          _usernameController.text, _passwordController.text);
-                    },
-                    child: const Text('Sign In')),
+                    onPressed: onSignInPressed, child: const Text('Sign In')),
                 const Spacer(),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     const Text("Don't have an account yet?"),
-                    TextButton(onPressed: () {}, child: const Text('Register'))
+                    TextButton(
+                        onPressed: () {
+                          context.go(AppPage.signUp.path);
+                        },
+                        child: const Text('Register'))
                   ],
                 )
               ],

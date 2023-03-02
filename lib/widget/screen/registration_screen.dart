@@ -72,7 +72,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
               children: [
                 DynamicInputWidget(
                   controller: _emailController,
-                  prefIcon: Icons.email,
+                  prefixIcon: Icons.email,
                   labelText: 'Email',
                   textInputAction: TextInputAction.next,
                 ),
@@ -81,7 +81,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 ),
                 DynamicInputWidget(
                   controller: _usernameController,
-                  prefIcon: Icons.person,
+                  prefixIcon: Icons.person,
                   labelText: 'Username',
                   textInputAction: TextInputAction.next,
                 ),
@@ -90,7 +90,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 ),
                 DynamicInputWidget(
                   controller: _passwordController,
-                  prefIcon: Icons.password,
+                  prefixIcon: Icons.password,
                   labelText: 'Password',
                   obscureText: isPasswordHidden,
                   isPasswordField: true,

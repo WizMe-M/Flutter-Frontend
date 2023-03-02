@@ -79,7 +79,7 @@ class _AuthScreenState extends State<AuthScreen> {
               children: [
                 DynamicInputWidget(
                   controller: _usernameController,
-                  prefIcon: Icons.person,
+                  prefixIcon: Icons.person,
                   labelText: 'Username',
                   textInputAction: TextInputAction.next,
                 ),
@@ -88,7 +88,7 @@ class _AuthScreenState extends State<AuthScreen> {
                 ),
                 DynamicInputWidget(
                   controller: _passwordController,
-                  prefIcon: Icons.password,
+                  prefixIcon: Icons.password,
                   labelText: 'Password',
                   textInputAction: TextInputAction.done,
                   obscureText: isPasswordHidden,

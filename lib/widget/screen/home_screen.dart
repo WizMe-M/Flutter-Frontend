@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_frontend/widget/page/edit_profile_page.dart';
+import 'package:flutter_frontend/widget/page/notes_page.dart';
 import 'package:flutter_frontend/widget/page/profile_page.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -19,6 +20,7 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     super.initState();
     pages = [
+      NotesPage(token: widget.token),
       ProfilePage(token: widget.token),
       EditableProfilePage(token: widget.token),
     ];
@@ -29,6 +31,10 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       bottomNavigationBar: BottomNavigationBar(
         items: const [
+          BottomNavigationBarItem(
+              icon: Icon(Icons.sticky_note_2),
+              label: 'Notes',
+              tooltip: 'Open list of notes'),
           BottomNavigationBarItem(
               icon: Icon(Icons.person),
               label: 'Profile',

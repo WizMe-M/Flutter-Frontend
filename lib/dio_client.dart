@@ -97,7 +97,7 @@ class DioClient {
 
     var idSubStr = id != null ? '/$id' : '';
     try {
-      response = await _dio.get('$_baseUrl/note$idSubStr}',
+      response = await _dio.get('$_baseUrl/note$idSubStr',
           options: Options(headers: {authHeader: 'Bearer $token'}));
     } on DioError catch (e) {
       return e.response?.data != null

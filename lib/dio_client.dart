@@ -56,6 +56,21 @@ class DioClient {
     return ModelResponse.fromJson(response.data);
   }
 
+  Future<ModelResponse?> getProfile({required String token}) async {
+    Response? response;
+
+    try {
+      response = await _dio.get('$_baseUrl/user',
+          options: Options(headers: {authHeader: 'Bearer $token'}));
+    } on DioError catch (e) {
+      return e.response?.data != null
+          ? ModelResponse.fromJson(e.response!.data)
+          : null;
+    }
+
+    return ModelResponse.fromJson(response.data);
+  }
+
   Future<ModelResponse?> updateProfile(
       {required String token,
       required String email,
@@ -77,11 +92,12 @@ class DioClient {
     return ModelResponse.fromJson(response.data);
   }
 
-  Future<ModelResponse?> getProfile({required String token}) async {
+  Future<ModelResponse?> getNote({required String token, int? id}) async {
     Response? response;
 
+    var idSubStr = id != null ? '/$id' : '';
     try {
-      response = await _dio.get('$_baseUrl/user',
+      response = await _dio.get('$_baseUrl/note$idSubStr}',
           options: Options(headers: {authHeader: 'Bearer $token'}));
     } on DioError catch (e) {
       return e.response?.data != null

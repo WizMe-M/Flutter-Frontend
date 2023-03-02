@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_frontend/model/user.dart';
 import 'package:flutter_frontend/widget/page/edit_profile_page.dart';
 import 'package:flutter_frontend/widget/page/profile_page.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key? key, required this.authorized}) : super(key: key);
-  final User authorized;
+  const HomeScreen({Key? key, required this.token}) : super(key: key);
+  final String token;
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -20,8 +19,8 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     super.initState();
     pages = [
-      ProfilePage(authorized: widget.authorized),
-      EditableProfilePage(authorized: widget.authorized),
+      ProfilePage(token: widget.token),
+      EditableProfilePage(token: widget.token),
     ];
   }
 

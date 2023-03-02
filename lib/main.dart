@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_frontend/model/user.dart';
 import 'package:flutter_frontend/widget/screen/home_screen.dart';
 import 'package:flutter_frontend/widget/screen/auth_screen.dart';
 import 'package:flutter_frontend/widget/screen/registration_screen.dart';
@@ -39,7 +38,7 @@ class MyApp extends StatelessWidget {
       AppRoute(
         screen: AppScreen.home,
         builder: (context, state) =>
-            HomeScreen(authorized: state.extra as User),
+            HomeScreen(token: state.queryParams['token']!),
       )
     ],
   );

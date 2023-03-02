@@ -1,30 +1,68 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_frontend/dio_client.dart';
 import 'package:flutter_frontend/model/user.dart';
 import 'package:flutter_frontend/widget/utils/dynamic_auth_widget.dart';
 
 class EditableProfilePage extends StatefulWidget {
-  const EditableProfilePage({Key? key, required this.authorized})
-      : super(key: key);
+  const EditableProfilePage({Key? key, required this.token}) : super(key: key);
 
-  final User authorized;
+  final String token;
 
   @override
   State<EditableProfilePage> createState() => _EditableProfilePageState();
 }
 
 class _EditableProfilePageState extends State<EditableProfilePage> {
+  final DioClient _client = DioClient();
+
   late TextEditingController _emailController;
   late TextEditingController _usernameController;
 
   @override
   void initState() {
     super.initState();
-    _emailController = TextEditingController(text: widget.authorized.email);
-    _usernameController =
-        TextEditingController(text: widget.authorized.userName);
+    _emailController = TextEditingController(text: '');
+    _usernameController = TextEditingController(text: '');
+
+    fetchUser();
   }
 
-  void updateProfile() async {}
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _usernameController.dispose();
+    super.dispose();
+  }
+
+  void fetchUser() async {
+    var response = await _client.getProfile(token: widget.token);
+    var user = User.fromJson(response!.data);
+    _emailController.text = user.email!;
+    _usernameController.text = user.userName!;
+  }
+
+  void updateProfile() async {
+    var response = await _client.updateProfile(
+        token: widget.token,
+        username: _usernameController.text,
+        email: _emailController.text);
+
+    if (response == null || response.error!.isNotEmpty) {
+      var alert = AlertDialog(
+        title: const Text('Update profile error'),
+        content: Text(response?.error ?? 'Unknown error'),
+      );
+
+      if (context.mounted) {
+        await showDialog(
+          context: context,
+          builder: (context) => alert,
+        );
+      }
+    }
+
+    fetchUser();
+  }
 
   @override
   Widget build(BuildContext context) {

@@ -33,13 +33,7 @@ class DioClient {
           : null;
     }
 
-    var modelResponse = ModelResponse.fromJson(response.data);
-    var user = User.fromJson(modelResponse.data);
-
-    // 'Authorization' Header with Bearer JWT-token for next requests in this session
-    _dio.options.headers[authHeader] = 'Bearer ${user.accessToken}';
-
-    return modelResponse;
+    return ModelResponse.fromJson(response.data);
   }
 
   Future<ModelResponse?> register(
@@ -59,7 +53,42 @@ class DioClient {
           : null;
     }
 
-    var modelResponse = ModelResponse.fromJson(response.data);
-    return modelResponse;
+    return ModelResponse.fromJson(response.data);
+  }
+
+  Future<ModelResponse?> updateProfile(
+      {required String token,
+      required String email,
+      required String username}) async {
+    Response? response;
+
+    var inputted = User(email: email, userName: username);
+
+    try {
+      response = await _dio.post('$_baseUrl/user',
+          data: inputted.toJson(),
+          options: Options(headers: {authHeader: 'Bearer $token'}));
+    } on DioError catch (e) {
+      return e.response?.data != null
+          ? ModelResponse.fromJson(e.response!.data)
+          : null;
+    }
+
+    return ModelResponse.fromJson(response.data);
+  }
+
+  Future<ModelResponse?> getProfile({required String token}) async {
+    Response? response;
+
+    try {
+      response = await _dio.get('$_baseUrl/user',
+          options: Options(headers: {authHeader: 'Bearer $token'}));
+    } on DioError catch (e) {
+      return e.response?.data != null
+          ? ModelResponse.fromJson(e.response!.data)
+          : null;
+    }
+
+    return ModelResponse.fromJson(response.data);
   }
 }

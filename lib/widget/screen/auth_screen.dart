@@ -43,7 +43,10 @@ class _AuthScreenState extends State<AuthScreen> {
             TextButton(
                 onPressed: () {
                   if (authorized) {
-                    context.go(AppScreen.home.path, extra: user);
+                    context.go(Uri(
+                            path: AppScreen.home.path,
+                            queryParameters: {'token': user!.accessToken})
+                        .toString());
                   } else {
                     context.pop();
                   }

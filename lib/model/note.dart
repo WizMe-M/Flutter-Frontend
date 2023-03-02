@@ -11,7 +11,7 @@ class Note with _$Note {
     required String? name,
     required String? content,
     required DateTime? createdDate,
-    required DateTime? editedDat,
+    required DateTime? editedDate,
   }) = _Note;
 
   factory Note.fromJson(Map<String, dynamic> json) => _$NoteFromJson(json);

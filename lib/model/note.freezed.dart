@@ -24,7 +24,7 @@ mixin _$Note {
   String? get name => throw _privateConstructorUsedError;
   String? get content => throw _privateConstructorUsedError;
   DateTime? get createdDate => throw _privateConstructorUsedError;
-  DateTime? get editedDat => throw _privateConstructorUsedError;
+  DateTime? get editedDate => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -41,7 +41,7 @@ abstract class $NoteCopyWith<$Res> {
       String? name,
       String? content,
       DateTime? createdDate,
-      DateTime? editedDat});
+      DateTime? editedDate});
 }
 
 /// @nodoc
@@ -61,7 +61,7 @@ class _$NoteCopyWithImpl<$Res, $Val extends Note>
     Object? name = freezed,
     Object? content = freezed,
     Object? createdDate = freezed,
-    Object? editedDat = freezed,
+    Object? editedDate = freezed,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
@@ -80,9 +80,9 @@ class _$NoteCopyWithImpl<$Res, $Val extends Note>
           ? _value.createdDate
           : createdDate // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-      editedDat: freezed == editedDat
-          ? _value.editedDat
-          : editedDat // ignore: cast_nullable_to_non_nullable
+      editedDate: freezed == editedDate
+          ? _value.editedDate
+          : editedDate // ignore: cast_nullable_to_non_nullable
               as DateTime?,
     ) as $Val);
   }
@@ -99,7 +99,7 @@ abstract class _$$_NoteCopyWith<$Res> implements $NoteCopyWith<$Res> {
       String? name,
       String? content,
       DateTime? createdDate,
-      DateTime? editedDat});
+      DateTime? editedDate});
 }
 
 /// @nodoc
@@ -115,7 +115,7 @@ class __$$_NoteCopyWithImpl<$Res> extends _$NoteCopyWithImpl<$Res, _$_Note>
     Object? name = freezed,
     Object? content = freezed,
     Object? createdDate = freezed,
-    Object? editedDat = freezed,
+    Object? editedDate = freezed,
   }) {
     return _then(_$_Note(
       id: freezed == id
@@ -134,9 +134,9 @@ class __$$_NoteCopyWithImpl<$Res> extends _$NoteCopyWithImpl<$Res, _$_Note>
           ? _value.createdDate
           : createdDate // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-      editedDat: freezed == editedDat
-          ? _value.editedDat
-          : editedDat // ignore: cast_nullable_to_non_nullable
+      editedDate: freezed == editedDate
+          ? _value.editedDate
+          : editedDate // ignore: cast_nullable_to_non_nullable
               as DateTime?,
     ));
   }
@@ -150,7 +150,7 @@ class _$_Note implements _Note {
       required this.name,
       required this.content,
       required this.createdDate,
-      required this.editedDat});
+      required this.editedDate});
 
   factory _$_Note.fromJson(Map<String, dynamic> json) => _$$_NoteFromJson(json);
 
@@ -163,11 +163,11 @@ class _$_Note implements _Note {
   @override
   final DateTime? createdDate;
   @override
-  final DateTime? editedDat;
+  final DateTime? editedDate;
 
   @override
   String toString() {
-    return 'Note(id: $id, name: $name, content: $content, createdDate: $createdDate, editedDat: $editedDat)';
+    return 'Note(id: $id, name: $name, content: $content, createdDate: $createdDate, editedDate: $editedDate)';
   }
 
   @override
@@ -180,14 +180,14 @@ class _$_Note implements _Note {
             (identical(other.content, content) || other.content == content) &&
             (identical(other.createdDate, createdDate) ||
                 other.createdDate == createdDate) &&
-            (identical(other.editedDat, editedDat) ||
-                other.editedDat == editedDat));
+            (identical(other.editedDate, editedDate) ||
+                other.editedDate == editedDate));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode =>
-      Object.hash(runtimeType, id, name, content, createdDate, editedDat);
+      Object.hash(runtimeType, id, name, content, createdDate, editedDate);
 
   @JsonKey(ignore: true)
   @override
@@ -209,7 +209,7 @@ abstract class _Note implements Note {
       required final String? name,
       required final String? content,
       required final DateTime? createdDate,
-      required final DateTime? editedDat}) = _$_Note;
+      required final DateTime? editedDate}) = _$_Note;
 
   factory _Note.fromJson(Map<String, dynamic> json) = _$_Note.fromJson;
 
@@ -222,7 +222,7 @@ abstract class _Note implements Note {
   @override
   DateTime? get createdDate;
   @override
-  DateTime? get editedDat;
+  DateTime? get editedDate;
   @override
   @JsonKey(ignore: true)
   _$$_NoteCopyWith<_$_Note> get copyWith => throw _privateConstructorUsedError;

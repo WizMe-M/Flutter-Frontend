@@ -2,11 +2,11 @@ import 'package:flutter_frontend/routing/enum_app_page.dart';
 import 'package:go_router/go_router.dart';
 
 class AppRoute extends GoRoute {
-  AppRoute({required this.page, required super.builder})
+  AppRoute({required this.screen, required super.builder})
       : super(
-          path: page.path,
-          name: page.name,
+          path: screen.path,
+          name: screen.name,
         );
 
-  final AppPage page;
+  final AppScreen screen;
 }

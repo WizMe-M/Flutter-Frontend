@@ -1,8 +1,10 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_frontend/widget/page/auth_page.dart';
-import 'package:flutter_frontend/widget/page/registration_page.dart';
+import 'package:flutter_frontend/model/user.dart';
+import 'package:flutter_frontend/widget/screen/home_screen.dart';
+import 'package:flutter_frontend/widget/screen/auth_screen.dart';
+import 'package:flutter_frontend/widget/screen/registration_screen.dart';
 import 'package:flutter_frontend/routing/app_route.dart';
 import 'package:flutter_frontend/routing/enum_app_page.dart';
 import 'package:go_router/go_router.dart';
@@ -24,15 +26,20 @@ class MyApp extends StatelessWidget {
   MyApp({super.key});
 
   final GoRouter _router = GoRouter(
-    initialLocation: AppPage.signIn.path,
+    initialLocation: AppScreen.signIn.path,
     routes: [
       AppRoute(
-        page: AppPage.signIn,
-        builder: (context, state) => const AuthPage(),
+        screen: AppScreen.signIn,
+        builder: (context, state) => const AuthScreen(),
       ),
       AppRoute(
-        page: AppPage.signUp,
-        builder: (context, state) => const RegistrationPage(),
+        screen: AppScreen.signUp,
+        builder: (context, state) => const RegistrationScreen(),
+      ),
+      AppRoute(
+        screen: AppScreen.home,
+        builder: (context, state) =>
+            HomeScreen(authorized: state.extra as User),
       )
     ],
   );

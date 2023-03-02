@@ -1,8 +1,9 @@
-enum AppPage {
-  signIn('Authorization page', '/auth'),
-  signUp('Registration page', '/register');
+enum AppScreen {
+  signIn('Authorization screen', '/auth'),
+  signUp('Registration screen', '/register'),
+  home('Home screen', '/home');
 
-  const AppPage(this.name, this.path);
+  const AppScreen(this.name, this.path);
 
   final String path;
   final String name;

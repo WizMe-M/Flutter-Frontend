@@ -6,14 +6,14 @@ import 'package:flutter_frontend/routing/enum_app_page.dart';
 import 'package:flutter_frontend/widget/utils/dynamic_auth_widget.dart';
 import 'package:go_router/go_router.dart';
 
-class AuthPage extends StatefulWidget {
-  const AuthPage({Key? key}) : super(key: key);
+class AuthScreen extends StatefulWidget {
+  const AuthScreen({Key? key}) : super(key: key);
 
   @override
-  State<AuthPage> createState() => _AuthPageState();
+  State<AuthScreen> createState() => _AuthScreenState();
 }
 
-class _AuthPageState extends State<AuthPage> {
+class _AuthScreenState extends State<AuthScreen> {
   final DioClient _client = DioClient();
 
   final TextEditingController _usernameController = TextEditingController();
@@ -43,8 +43,7 @@ class _AuthPageState extends State<AuthPage> {
             TextButton(
                 onPressed: () {
                   if (authorized) {
-                    context.pop();
-                    // context.go(AppPage.signUp.path);
+                    context.go(AppScreen.home.path, extra: user);
                   } else {
                     context.pop();
                   }
@@ -108,7 +107,7 @@ class _AuthPageState extends State<AuthPage> {
                     const Text("Don't have an account yet?"),
                     TextButton(
                         onPressed: () {
-                          context.go(AppPage.signUp.path);
+                          context.go(AppScreen.signUp.path);
                         },
                         child: const Text('Register'))
                   ],

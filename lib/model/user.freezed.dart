@@ -186,9 +186,9 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res, _$_User>
 class _$_User implements _User {
   const _$_User(
       {this.id,
-      required this.userName,
+      this.userName,
       this.email,
-      required this.password,
+      this.password,
       this.accessToken,
       this.refreshToken,
       this.salt,
@@ -260,9 +260,9 @@ class _$_User implements _User {
 abstract class _User implements User {
   const factory _User(
       {final int? id,
-      required final String? userName,
+      final String? userName,
       final String? email,
-      required final String? password,
+      final String? password,
       final String? accessToken,
       final String? refreshToken,
       final String? salt,

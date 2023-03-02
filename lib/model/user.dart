@@ -8,9 +8,9 @@ part 'user.g.dart';
 class User with _$User {
   const factory User(
       {int? id,
-      required String? userName,
+      String? userName,
       String? email,
-      required String? password,
+      String? password,
       String? accessToken,
       String? refreshToken,
       String? salt,

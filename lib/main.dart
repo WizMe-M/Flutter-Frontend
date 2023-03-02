@@ -3,8 +3,8 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_frontend/widget/page/auth_page.dart';
 import 'package:flutter_frontend/widget/page/registration_page.dart';
-import 'package:flutter_frontend/widget/routing/app_route.dart';
-import 'package:flutter_frontend/widget/routing/enum_app_page.dart';
+import 'package:flutter_frontend/routing/app_route.dart';
+import 'package:flutter_frontend/routing/enum_app_page.dart';
 import 'package:go_router/go_router.dart';
 import 'package:window_size/window_size.dart';
 

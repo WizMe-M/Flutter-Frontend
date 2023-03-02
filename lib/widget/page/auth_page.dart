@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_frontend/dio_client.dart';
 import 'package:flutter_frontend/model/model_response.dart';
 import 'package:flutter_frontend/model/user.dart';
-import 'package:flutter_frontend/widget/routing/enum_app_page.dart';
+import 'package:flutter_frontend/routing/enum_app_page.dart';
 import 'package:flutter_frontend/widget/utils/dynamic_auth_widget.dart';
 import 'package:go_router/go_router.dart';
 
